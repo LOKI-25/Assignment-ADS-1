@@ -19,6 +19,9 @@ export const resolvers = {
         }
         return movie;
       } catch (error) {
+        if (error.message === "Movie not found.") {
+          throw error;  
+        }
         throw new Error(`Failed to fetch movie with title ${args.title}.`);
       }
     },
@@ -52,6 +55,9 @@ export const resolvers = {
         }
         return await Movie.find();
       } catch (error) {
+        if (error.message === `Movie with ID ${args.id} not found.`) {
+          throw error;  
+        }
         throw new Error(`Failed to delete movie with ID ${args.id}.`);
       }
     },
@@ -64,6 +70,9 @@ export const resolvers = {
         }
         return await Movie.find();
       } catch (error) {
+        if (error.message === `Movie with title ${args.title} not found.`) {
+          throw error;  
+        }
         throw new Error(`Failed to delete movie with title ${args.title}.`);
       }
     },
